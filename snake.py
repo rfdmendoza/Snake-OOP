@@ -64,13 +64,18 @@ class Snake:
     def check_if_collided(self):
         for segment in self.snake_body[1:]:
             if self.head.distance(segment) < 19:
-                return False
-        if  (self.head.xcor() >=280 or self.head.xcor() <= -280
-               or self.head.ycor() >=280 or self.head.ycor() <= -280):
-            return False
-        else:
+                return True
+        if  (self.head.xcor() >=285 or self.head.xcor() <= -285
+               or self.head.ycor() >=285 or self.head.ycor() <= -285):
             return True
-
-
+        else:
+            return False
+    def reset_snake(self):
+        for segment in self.snake_body:
+            segment.hideturtle()
+        self.snake_body.clear()
+        self.snake_positions.clear()
+        self.initialize_snake()
+        self.head = self.snake_body[0]
 
 

@@ -21,17 +21,21 @@ canvas.onkey(fun= snake.down,key= "Down")
 canvas.onkey(fun = snake.left,key= "Left")
 canvas.onkey(fun = snake.right,key= "Right")
 
-while is_game_going :
-    canvas.update()
-    time.sleep(0.1)
-    if not snake.check_if_collided():
-        is_game_going = False
-        score.game_over()
-    snake.move()
-    if snake.head.distance(food) < 15:
-        while food.spawn_food() in snake.snake_positions:
-           food.spawn_food()
-        snake.increase_length()
-        score.add_score()
+
+def game():
+    global is_game_going
+    while is_game_going :
+        canvas.update()
+        time.sleep(0.1)
+        snake.move()
+        if snake.check_if_collided():
+            snake.reset_snake()
+            score.reset_score()
+        if snake.head.distance(food) < 15:
+            while food.spawn_food() in snake.snake_positions:
+               food.spawn_food()
+            snake.increase_length()
+            score.add_score()
+game()
 
 canvas.exitonclick()
